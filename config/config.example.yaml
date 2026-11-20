@@ -1,0 +1,38 @@
+# Copy to config.yaml and configure your own services.
+RAGServer:
+  server_id: 0
+  app_port: 21032
+  app_debug: false
+  graph_url: 127.0.0.1:22111
+  username: root
+  password: ''
+  num_workers: 4
+  max_num_task: 100
+  llm_max_context: 32768
+  embedding_max_context: 8192
+  global_database: GraphRAG
+  log_level: info
+  output_dir: ./
+  mcp_port: 21032
+LLMConfig:
+  max_tokens: 4096
+LLM:
+  llm_url: null
+  llm_base: http://127.0.0.1:8000/v1
+  llm_model: qwen2.5-7b-instruct
+  llm_key: null
+Embedding:
+  embedding_url: null
+  embedding_base: http://127.0.0.1:8000/v1
+  embedding_model: acge_text_embedding
+  embedding_key: null
+MLLM:
+  mllm_url: null
+  mllm_base: http://127.0.0.1:8000/v1
+  mllm_model: Qwen2-Audio-7B-Instruct
+  mllm_key: null
+CHAT:
+  chat_url: null
+  chat_base: http://127.0.0.1:8000/v1
+  chat_model: qwen2.5-72b-instruct
+  chat_key: null

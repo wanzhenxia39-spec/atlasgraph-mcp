@@ -1,0 +1,30 @@
+# Supply a compatible base image with --build-arg BASE_IMAGE=...
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+WORKDIR /root
+COPY Miniforge3-24.9.2-0-Linux-x86_64.sh .
+RUN curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo; \
+    #安装miniconda
+    bash Miniforge3-24.9.2-0-Linux-x86_64.sh -b; rm -rf Miniforge3-24.9.2-0-Linux-x86_64.sh; \
+    mkdir -p /usr/share/fonts/songti
+
+#安装依赖
+RUN yum install -y epel-release wget mesa-libGL libgomp gcc-c++ libreoffice
+
+
+#使用conda环境
+ENV PATH=/root/miniforge3/bin:${PATH}
+RUN conda init bash
+RUN rm -rf /root/.cache
+COPY requirements.txt .
+RUN pip install -r requirements.txt -i https://pypi.doubanio.com/simple
+#拷贝文件
+#root 文件夹包含atlasgraph安装包，requirements.txt，及最新RAG代码
+#usr 内为字体文件
+#COPY /tmpfiles_root /root
+#COPY /tmpfiles_usr /usr/share/fonts/songti
+
+#RUN pip install atlasgraph-1.1.0.1-py3-none-any.whl;\
+#    rm atlasgraph-1.1.0.1-py3-none-any.whl;\
+#    pip install -r requirements.txt
+# docker build --build-arg BASE_IMAGE=your-base-image -f docker/Dockerfile -t atlasgraph-mcp:local .

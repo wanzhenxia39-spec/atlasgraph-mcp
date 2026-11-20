@@ -1,0 +1,22 @@
+{
+    "vertices": {
+        "Entity": [
+            "keyword",
+            "description"
+        ]
+    },
+    "edges": {
+        "Relation": {
+            "relations": [
+                {
+                    "from_key": "Entity",
+                    "to_key": "Entity"
+                }
+            ],
+            "properties": [
+                "keyword"
+            ]
+        }
+    },
+    "explain": "Entity是存储实体的标签，Relation是实体与实体的关系标签"
+}
